@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/LessonHibernate</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">chT?7ALah@5</property>
+        <!--Dialekt zaprosov, zdes stoit etot dialekt potomu chto mu vukorustovyem MySQL-->
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <!--Pokazuvat sql ili net-->
+        <property name="show_sql">true</property>
+
+        <!--Etot parameter oznachaet chto bydet update tablica pri vupolnenii koda-->
+        <!-- DB schema will be updated if needed -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <mapping class="hibernate.java.a1.Employee"/>
+
+    </session-factory>
+</hibernate-configuration>

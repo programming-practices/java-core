@@ -1,0 +1,111 @@
+Чтобы запустить psql, в операционной системе Linux выполните команду:
+		$ sudo -u postgres psql
+
+------------------------------------------------------------------------------------------------------------------------
+Теперь переключимся на созданную базу:
+		postgres=# \c test
+		You are now connected to database "test" as user "postgres".
+		test=#
+
+------------------------------------------------------ HELP ------------------------------------------------------------
+Такая справка есть по каждой команде SQL, а полный список команд легко получить 
+с помощью \help без параметров.
+
+Команд psql довольно много, и с некоторыми из них мы познакомимся чуть позже, а полный список с кратким описанием можно
+получить прямо сейчас:
+		test=# \?
+
+Точный синтаксис команды CREATE TABLE можно посмотреть в документации, либо попросить справку прямо в psql:
+		test=# \help CREATE TABLE
+
+------------------------------------------------ CREATE DATABASE -------------------------------------------------------
+Давайте создадим новую базу данных с именем test. Выполните:
+		postgres=# CREATE DATABASE test;
+		CREATE DATABASE
+
+
+-------------------------------------------------- CREATE TABLE --------------------------------------------------------
+Давайте создадим таблицу:
+		test=# CREATE TABLE courses(c_no text PRIMARY KEY, title text,
+                       hours integer);
+		CREATE TABLE
+		
+		test=# CREATE TABLE students(s_id integer PRIMARY KEY, name text,
+		       start_year integer);
+		CREATE TABLE 
+
+		test=# CREATE TABLE exams(
+		    s_id integer REFERENCES students(s_id),
+		    c_no text REFERENCES courses(c_no),
+		    score integer,
+		    CONSTRAINT pk PRIMARY KEY(s_id, c_no)
+		);
+		CREATE TABLE
+
+--------------------------------------------------- INSERT INTO --------------------------------------------------------
+Добавим в созданную таблицу несколько строк:
+		test=# INSERT INTO courses(c_no, title, hours) VALUES 
+				('CS301', 'Базы данных', 30),
+				('CS305', 'Сети ЭВМ', 60);
+		INSERT 0 2
+
+     	        test=# INSERT INTO students(s_id, name, start_year) VALUES 
+				(1451, 'Анна', 2014), 
+				(1432, 'Виктор', 2014), 
+				(1556, 'Нина', 2015);
+		INSERT 0 3
+
+		test=# INSERT INTO exams(s_id, c_no, score) VALUES 
+				(1451, 'CS301', 5),
+				(1556, 'CS301', 5),
+				(1451, 'CS305', 5),
+				(1432, 'CS305', 4);
+		INSERT 0 4
+
+------------------------------------------------------ SELECT ----------------------------------------------------------
+Чтение данных из таблиц выполняется оператором SELECT.Например, выведем два столбца из таблицы courses:
+		test=# SELECT title AS course_title, hours FROM courses;
+
+Конструкция AS позволяет переименовать столбец, если это необходимо. Чтобы вывести все столбцы, достаточно указать
+символ звездочки:
+		test=# SELECT * FROM courses;
+
+		test=# SELECT start_year FROM students;
+
+Чтобы выбрать все различные года поступления, после SELECT надо добавить слово DISTINCT:
+		test=# SELECT DISTINCT start_year FROM students;
+
+Такое условие фильтрации записывается во фразе WHERE:
+		test=# SELECT * FROM courses WHERE hours > 45;
+
+Вообще после слова SELECT можно указывать и любые выражения. А без фразы FROM результирующая таблица будет содержать
+одну строку. Например:
+		test=# SELECT 2+2 AS result;
+			result
+		       --------
+			     4
+			(1 row)
+
+Соединения:
+		test=# SELECT * FROM courses, exams;
+
+Получим оценки по всем дисциплинам, сопоставляя курсы с теми экзаменами, которые проводились именно по данному курсу:
+		test=# SELECT courses.title, exams.s_id, exams.score
+		       FROM courses, exams
+                       WHERE courses.c_no = exams.c_no;
+
+Запросы можно формулировать и в другом виде, указывая соединения с помощью ключевого слова JOIN.Выведем студентов и их
+оценки по курсу «Сети ЭВМ»:
+		test=# SELECT students.name, exams.score
+		       FROM students
+		       JOIN exams
+		       ON students.s_id = exams.s_id
+                       AND exams.c_no = 'CS305';
+
+
+		
+
+
+
+
+

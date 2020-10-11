@@ -1,0 +1,5 @@
+Hola!
+Como estas?
+Cuentame algo de tu vida...
+
+/home/dtrl/Datos/Programacion/studies_a_programing/src/main/java/_Books/Java_8_Polnoe_rykovodstvo_9_izdanie/_1_Lenguage_Java/_13_Vvod_vuvod_apletu_i_prochie_voprosu/IO/Chtenie_i_zapis_danux_v_failu/CopyFile.java

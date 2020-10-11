@@ -1,0 +1,5 @@
+Madrid, Madrid, 3000000
+Barcelona, Barcelona, 2000000
+Malaga, Malaga, 1500000
+Valencia, Valencia, 900000
+Sevilla, Sevilla, 500000
