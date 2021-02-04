@@ -1,6 +1,7 @@
 package _enum;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 enum Color {BLACK, WHITE}
@@ -109,6 +110,8 @@ enum Level {
  */
 public class ExampleEnum {
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+//--------------------------------------------------------------------------------------------------------------------
+        System.out.println(Arrays.toString(Color.values()));
 //--------------------------------------------------------------------------------------------------------------------
         CofeSize cofeSize = CofeSize.SMALL;
         System.out.println(cofeSize);

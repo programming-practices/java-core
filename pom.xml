@@ -11,6 +11,20 @@
 
 
     <!--=================================================== Maven ===================================================-->
+    <!--    <build>-->
+    <!--        <plugins>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                <artifactId>maven-compiler-plugin</artifactId>-->
+    <!--                <version>3.8.0</version>-->
+    <!--                <configuration>-->
+    <!--                    <source>${java.version_11}</source>-->
+    <!--                    <target>${java.version_11}</target>-->
+    <!--                    <encoding>${project.build.sourceEncoding}</encoding>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+    <!--        </plugins>-->
+    <!--    </build>-->
     <build>
         <plugins>
             <plugin>
@@ -21,11 +35,21 @@
                     <source>${java.version_11}</source>
                     <target>${java.version_11}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArgs>
+                        <arg>-XDcompilePolicy=simple</arg>
+                        <arg>-Xplugin:ErrorProne</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.google.errorprone</groupId>
+                            <artifactId>error_prone_core</artifactId>
+                            <version>2.4.0</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 
     <!--================================================= Properties ================================================-->
     <properties>

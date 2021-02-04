@@ -1,5 +1,6 @@
 package collections.set;
 
+import java.util.HashSet;
 import java.util.Objects;
 
 /**
@@ -47,15 +48,16 @@ public class ExampleHashSet {
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 //        // Create age hash set.
-//        HashSet<String> hs = new HashSet<String>();
+        HashSet<String> hs = new HashSet<String>();
 //        // Add elements to the hash set.
-//        hs.add("Beta");
-//        hs.add("Alpha");
-//        hs.add("Eta");
-//        hs.add("Gamma");
-//        hs.add("Epsilon");
-//        hs.add("Omega");
-//        System.out.println(hs);
+        hs.add("Beta");
+        hs.add("Alpha");
+        hs.add("Eta");
+        hs.add("Gamma");
+        hs.add("Epsilon");
+        hs.add("Omega");
+        System.out.println(hs);
+        System.out.println(hs.iterator().next());
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 //        // Ostorozno zdes esli nado zberihat class ClassKotoruiImeetHashCode v HashSete()
